@@ -8,6 +8,8 @@
 
 'use strict';
 
+var exec = require('child_process').exec;
+
 module.exports = function(grunt) {
 
 	// Please see the Grunt documentation for more information regarding task
@@ -16,10 +18,30 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('jpg_sprites', 'Grunt task for converting a set of images into a sprite sheet', function () {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
-			punctuation : '.',
-			separator : ', '
+
 		});
 
-		grunt.log.writeln("test", this.files);
+		var orientation_sign = options.orientation === "horizontal" ? "+" : "-";
+
+		// Iterate over all specified file groups.
+		this.files.forEach(function (f) {
+			// Concat specified files.
+			var src = f.src.filter(function (filepath) {
+				// Warn on and remove invalid source files (if nonull was set).
+				if (!grunt.file.exists(filepath)) {
+					grunt.log.warn('Source file "' + filepath + '" not found.');
+					return false;
+				}
+				else {
+					return true;
+				}
+			}).map(function (filepath) {
+				return filepath;
+			}).join(grunt.util.normalizelf(" "));
+
+			//exec("convert " + src + " " + orientation_sign + "append " + f.dest);
+			exec("convert " + src + " " + orientation_sign + "append -size 32x32 " + f.dest);
+
+		});
 	});
 };

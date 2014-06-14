@@ -16,9 +16,13 @@ module.exports = function (grunt) {
 		jpg_sprites: {
 			test: {
 				options: {
+					orientation : 'vertical',//vertical
+					sizes : ['50x50']
 				},
+
 				files: {
-					'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+					'images/output2.jpg' : ['images/*.jpg'],
+					'images/output2.png' : ['images/*.png']
 				}
 			}
 		}
