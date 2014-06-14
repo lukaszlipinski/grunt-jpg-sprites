@@ -16,8 +16,8 @@ module.exports = function (grunt) {
 		jpg_sprites: {
 			test: {
 				options: {
-					orientation : 'vertical',//vertical
-					sizes : ['50x50']
+					orientation : 'horizontal',//vertical
+					sizes : ['100x100', '50x50', '40x40']//keep in mind that its designed only to work when all images has the same size
 				},
 
 				files: {
