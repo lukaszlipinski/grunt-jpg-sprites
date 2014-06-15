@@ -1,7 +1,7 @@
 {
 	"name": "grunt-jpg-sprites",
 	"description": "Grunt task for converting a set of images (JPG, PNG and more) into a spritesheet using ImageMagick.",
-	"version": "0.2.5",
+	"version": "0.3.0",
 	"homepage": "https://github.com/lukaszlipinski/grunt-jpg-sprites",
 	"author": {
 		"name": "Lukasz Lipinski",
@@ -33,6 +33,6 @@
 		"grunt": "~0.4.5"
 	},
 	"keywords": [
-		"jpg", "png", "sprite", "sprites", "imagemagick", "resize"
+		"jpg", "png", "sprite", "sprites", "imagemagick", "resize", "scale"
 	]
 }

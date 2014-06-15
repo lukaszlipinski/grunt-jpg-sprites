@@ -50,7 +50,15 @@ Determines how images will be arranged in image sprite.
 Type: `Array`
 Default value: `[]`
 
-Array of strings which represents sizes of single output image before concatenating.
+
+#### [options.compression]
+Type: `Object`
+Default value: `{type : "None", quality : 100}`
+
+Determines whether image should be compressed or not. Quality is from range 0 to 100. Possible compression types are:
+'B44', 'B44A', 'BZip', 'DXT1', 'DXT3', 'DXT5', 'Fax', 'Group4', 'JBIG1',
+'JBIG2', 'JPEG', 'JPEG2000', 'Lossless', 'LosslessJPEG', 'LZMA', 'LZW',
+'None', 'Piz', 'Pxr24', 'RLE', 'Zip', 'RunlengthEncoded', 'ZipS'
 
 ## Usage Examples
 
@@ -85,5 +93,29 @@ grunt.initConfig({
 });
 ```
 
+### Example with enabled compression
+
+```js
+grunt.initConfig({
+  jpg_sprites: {
+    options: {
+      orientation : 'horizontal',
+      sizes : ['100x100', '50x50', '40x40'],
+      compression : {
+        type : "JPEG",
+      	quality : 100
+      }
+    },
+    files: {
+      'images/output2.jpg' : ['images/*.jpg']
+    }
+  },
+});
+```
+
 ## Dependencies
 ImageMagick 6.8.9-1 (tested)
+
+## Release History
+Version 0.3.x - Support for compression has been added
+Version 0.2.x - Sprite creation and resizing

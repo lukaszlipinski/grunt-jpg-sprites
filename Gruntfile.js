@@ -17,7 +17,11 @@ module.exports = function (grunt) {
 			test: {
 				options: {
 					orientation : 'horizontal',//vertical
-					sizes : []//keep in mind that its designed only to work when all images has the same size
+					sizes : ['50x50', '25x25'],//keep in mind that its designed only to work when all images has the same size,
+					compression : {
+						type : "JPEG",
+						quality : 100
+					}
 				},
 
 				files: {

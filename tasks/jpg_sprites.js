@@ -25,6 +25,33 @@ module.exports = function(grunt) {
 	};
 
 	/**
+	 * Returns compression type
+	 *
+	 * @return {String}
+	 */
+	Helper.prototype.getCompressionType = function() {
+		return this.options.compression.type;
+	};
+
+	/**
+	 * Returns compression quality
+	 *
+	 * @return {Number}
+	 */
+	Helper.prototype.getCompressionQuality = function() {
+		return this.options.compression.quality;
+	};
+
+	/**
+	 * Determinates whether image should be compressed or not
+	 *
+	 * @return {String}
+	 */
+	Helper.prototype.hasToBeCompressed = function() {
+		return this.options.compression.type !== "None";
+	};
+
+	/**
 	 * Returns 'orientation sign' defined by ImageMagick library which determinates how images will be positioned in
 	 * image sprite.
 	 *
@@ -67,7 +94,14 @@ module.exports = function(grunt) {
 	 * @param {String} output_filepath   path to output file
 	 */
 	Helper.prototype.createSprite = function(filepaths, output_filepath) {
-		exec("convert " + filepaths + " " + this.getOrientationSign() + "append " + output_filepath);
+		var compression = "";
+
+		if (this.hasToBeCompressed()) {
+			//-compress this.getCompressionType()
+			compression = "-strip -compress " + this.getCompressionType() + " -quality " + this.getCompressionQuality() + "%";
+		}
+
+		exec("convert " + filepaths + " " + this.getOrientationSign() + "append " + compression + " " + output_filepath);
 	};
 
 	/**
@@ -98,8 +132,45 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('jpg_sprites', 'Grunt task for converting a set of images into a sprite sheet', function () {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
+			/**
+			 * Determines how images will be arranged in image sprite.
+			 *
+			 * @type {String}
+			 * @default 'horizontal'
+			 * @possible_values 'horizontal', 'vertical'
+			 */
 			orientation : 'horizontal',
-			sizes : []
+
+			/**
+			 * Array of strings which represents sizes of single output image before concatenating.
+			 *
+			 * @type {Array}
+			 * @default []
+			 */
+			sizes : [],
+
+			/**
+			 * Determines file compression
+			 * @see http://www.imagemagick.org/script/command-line-options.php#compress
+			 */
+			compression : {
+				/**
+				 * Determines compression type
+				 * @see PNG: http://www.imagemagick.org/Usage/formats/#png_quality
+				 * @see JPG: http://www.imagemagick.org/Usage/formats/#jpg
+				 *
+				 * @type {String}
+				 * @default 'None'
+				 * @possible_values 'B44', 'B44A', 'BZip', 'DXT1', 'DXT3', 'DXT5', 'Fax', 'Group4', 'JBIG1',
+				 *                  'JBIG2', 'JPEG', 'JPEG2000', 'Lossless', 'LosslessJPEG', 'LZMA', 'LZW',
+				 *                  'None', 'Piz', 'Pxr24', 'RLE', 'Zip', 'RunlengthEncoded', 'ZipS'
+				 */
+				type : 'None',
+				/**
+				 * Output image quality from 0 to 100
+				 */
+				quality : 100
+			}
 		});
 
 		var helper = new Helper(options);
