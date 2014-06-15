@@ -32,6 +32,10 @@ grunt.initConfig({
     files: {
       'images/output2.jpg' : ['images/*.jpg'],
       'images/output2.png' : ['images/*.png']
+    },
+    compression : {
+	  type : "JPEG",
+      quality : 100
     }
   },
 });
@@ -72,10 +76,6 @@ grunt.initConfig({
     },
     files: {
       'images/output2.jpg' : ['images/*.jpg']
-    },
-    compression : {
-      type : "JPEG",
-      quality : 100
     }
   },
 });
