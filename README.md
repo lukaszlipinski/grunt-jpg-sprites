@@ -121,5 +121,5 @@ grunt.initConfig({
 ImageMagick 6.8.9-1 (tested)
 
 ## Release History
-Version 0.3.x - Support for compression has been added
-Version 0.2.x - Sprite creation and resizing
+- Version 0.3.x - Support for compression has been added
+- Version 0.2.x - Sprite creation and resizing
