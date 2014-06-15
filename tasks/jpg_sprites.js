@@ -188,6 +188,19 @@ module.exports = function(grunt) {
 					return true;
 				}
 			}).map(function(filepath) {
+				/*function(error, stdout, stderr){
+					grunt.log.writeln('stdout: ' + stdout);
+					grunt.log.writeln('stderr: ' + stderr);
+					if (error !== null) {
+						grunt.log.writeln('exec error: ' + error);
+					}
+				}*/
+
+				//identify -verbose filename
+				/*var lol = exec("identify -verbose images/2.jpg'[50x50]'");
+
+				console.log(lol)*/
+
 				return filepath;
 			});
 
