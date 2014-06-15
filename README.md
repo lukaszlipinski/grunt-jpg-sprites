@@ -26,8 +26,8 @@ In your project's Gruntfile, add a section named `jpg_sprites` to the data objec
 grunt.initConfig({
   jpg_sprites: {
     options: {
-      orientation : 'horizontal',//vertical
-      sizes : ['100x100', '50x50', '40x40']//keep in mind that its designed only to work when all images has the same size
+      orientation : 'horizontal',
+      sizes : ['100x100', '50x50', '40x40']
     },
     files: {
       'images/output2.jpg' : ['images/*.jpg'],
@@ -42,15 +42,15 @@ grunt.initConfig({
 #### options.orientation
 Type: `String`
 Default value: `'horizontal'`
+Possible values: `'horizontal'`, `'vertical'`
 
 Determines how images will be arranged in image sprite.
 
-#### options.sizes
+#### [options.sizes]
 Type: `Array`
 Default value: `[]`
 
-Optional value. Used to resize all images before concatenating. Please notice that when input images will have different sizes,
-output sprite can be broken.
+Array of strings which represents sizes of single output image before concatenating.
 
 ## Usage Examples
 
@@ -87,6 +87,3 @@ grunt.initConfig({
 
 ## Dependencies
 ImageMagick 6.8.9-1 (tested)
-
-## Release History
-_(Nothing yet)_
