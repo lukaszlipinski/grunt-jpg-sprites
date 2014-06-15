@@ -52,9 +52,9 @@ Default value: `[]`
 Optional value. Used to resize all images before concatenating. Please notice that when input images will have different sizes,
 output sprite can be broken.
 
-### Usage Examples
+## Usage Examples
 
-## When you just want to create a sprite from random-size images:
+### When you just want to create a sprite from random-size images:
 
 ```js
 grunt.initConfig({
@@ -69,7 +69,7 @@ grunt.initConfig({
 });
 ```
 
-## When you have set of images of the same size and you want to create multiple resized sprites:
+### When you have set of images of the same size and you want to create multiple resized sprites:
 
 ```js
 grunt.initConfig({
