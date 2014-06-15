@@ -118,7 +118,7 @@ grunt.initConfig({
 ```
 
 ## Dependencies
-ImageMagick 6.8.9-1 (tested)
+- ImageMagick 6.8.9-1 (tested)
 
 ## Release History
 - Version 0.3.x - Support for compression has been added
