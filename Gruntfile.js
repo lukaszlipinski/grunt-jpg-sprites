@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 				},
 
 				files: {
-					'images/output2.jpg' : ['images/*.jpg'],
+					'images/lol/output2.jpg' : ['images/*.jpg'],
 					'images/output2.png' : ['images/*.png']
 				}
 			}

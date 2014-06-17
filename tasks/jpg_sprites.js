@@ -87,6 +87,14 @@ module.exports = function(grunt) {
 		return parts[0] + "_" + suffix + "." + parts[1];
 	};
 
+	Helper.prototype.getDirectoryPath = function(filepath) {
+		var parts = filepath.split("/");
+		//Remove last item
+		parts.pop()
+
+		return parts.join("/");
+	};
+
 	/**
 	 * Creates image sprite using ImageMagick
 	 *
@@ -99,6 +107,13 @@ module.exports = function(grunt) {
 		if (this.hasToBeCompressed()) {
 			//-compress this.getCompressionType()
 			compression = "-strip -compress " + this.getCompressionType() + " -quality " + this.getCompressionQuality() + "%";
+		}
+
+		var directory_path = this.getDirectoryPath(output_filepath);
+
+		//Create folder structure to file if does not exist
+		if (!grunt.file.exists(directory_path)) {
+			grunt.file.mkdir(directory_path);
 		}
 
 		exec("convert " + filepaths + " " + this.getOrientationSign() + "append " + compression + " " + output_filepath);
@@ -188,24 +203,24 @@ module.exports = function(grunt) {
 					return true;
 				}
 			}).map(function(filepath) {
-				/*function(error, stdout, stderr){
-					grunt.log.writeln('stdout: ' + stdout);
-					grunt.log.writeln('stderr: ' + stderr);
-					if (error !== null) {
-						grunt.log.writeln('exec error: ' + error);
-					}
-				}*/
-
-				//identify -verbose filename
-				/*var lol = exec("identify -verbose images/2.jpg'[50x50]'");
-
-				console.log(lol)*/
-
 				return filepath;
 			});
 
 			//Process images
 			helper.progressImages(filepaths, f.dest);
 		});
+
+		/*var lol = exec("identify images/2.jpg");
+		console.log(lol)
+
+		//identify -verbose filename
+		exec("identify -verbose images/2.jpg'[50x50]'", function(error, stdout, stderr) {
+			console.log("callback")
+			grunt.log.writeln('stdout: ' + stdout);
+			grunt.log.writeln('stderr: ' + stderr);
+			if (error !== null) {
+				grunt.log.writeln('exec error: ' + error);
+			}
+		});*/
 	});
 };
